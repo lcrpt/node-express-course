@@ -10,11 +10,12 @@ fs.readFile('users.json', {encoding: 'utf-8'}, function(err, data) {
 
   JSON.parse(data).forEach(function(user) {
     user.name.full = _.startCase(`${user.name.first} ${user.name.last}`)
+    users.push(user)
   })
 })
 
 app.get('/', function(req, res) {
-  res.send('Hello Léo')
+  res.send(JSON.stringify(users, null, 2))
 })
 
 app.get('/yo', function(req, res) {
