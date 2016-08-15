@@ -15,12 +15,26 @@ fs.readFile('users.json', {encoding: 'utf-8'}, function(err, data) {
 })
 
 app.get('/', function(req, res) {
-  res.send(JSON.stringify(users, null, 2))
+  var buffer = ''
+
+  users.forEach(function(user) {
+    buffer += `<a href="${user.username}">${user.name.full}</a><br>`
+  })
+
+  res.send(buffer)
 })
 
-app.get('/yo', function(req, res) {
-  res.send('YOOOO !!')
+app.get(/big.*/, function(req, res, next) {
+  console.log('BIG USERS ACCESS')
+  next()
 })
+
+app.get('/:username', function(req, res) {
+  var username = req.params.username
+  res.send(username)
+})
+
+
 
 var server = app.listen(3000, function() {
   console.log(`Server running at http://localhost:${server.address().port}`);
