@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Index</title>
+  <style media="screen">
+  * {font-family: Helvetica, Arial, sans-serif;}
+  div {display: flex; align-items: center; padding: 1em; font-size: 1.2em;}
+  div a {padding-left: 0.5em;}
+  </style>
+</head>
+<body>
+  <h1>Handlebars</h1>
+  <ul>
+    {{#each users as |user|}}
+    <div>
+      <img src="/profilepics/{{user.username}}_sm.jpg" alt="{{user.name.full}}">
+      <li><a href="/{{user.username}}">{{user.name.full}}</a></li>
+    </div>
+    {{/each}}
+  </ul>
+</body>
+</html>
